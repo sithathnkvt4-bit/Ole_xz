@@ -1,0 +1,51 @@
+
+-- OLE_XZ WINDOW CONTROLS
+-- ใช้แทนระบบ close/reopen เดิม
+
+local minimized = false
+
+-- ปุ่มย่อเมนู
+local minimize = Instance.new("TextButton")
+minimize.Size = UDim2.new(0, 34, 0, 34)
+minimize.Position = UDim2.new(1, -80, 0, 8)
+minimize.Text = "—"
+minimize.TextSize = 22
+minimize.Font = Enum.Font.GothamBold
+minimize.TextColor3 = Color3.new(1, 1, 1)
+minimize.BackgroundColor3 = Color3.fromRGB(40, 90, 65)
+minimize.Parent = main
+Instance.new("UICorner", minimize).CornerRadius = UDim.new(0, 8)
+
+-- ปุ่มเล็กสำหรับเปิดเมนูกลับ
+local miniButton = Instance.new("TextButton")
+miniButton.Size = UDim2.new(0, 125, 0, 42)
+miniButton.Position = UDim2.new(0, 12, 0.5, -21)
+miniButton.Text = "🌿 OLE_XZ"
+miniButton.TextSize = 14
+miniButton.Font = Enum.Font.GothamBold
+miniButton.TextColor3 = Color3.fromRGB(130, 255, 175)
+miniButton.BackgroundColor3 = Color3.fromRGB(12, 30, 22)
+miniButton.Visible = false
+miniButton.Parent = gui
+Instance.new("UICorner", miniButton).CornerRadius = UDim.new(0, 12)
+
+-- ย่อเมนู
+minimize.Activated:Connect(function()
+    minimized = true
+    main.Visible = false
+    miniButton.Visible = true
+end)
+
+-- เปิดเมนูกลับ
+miniButton.Activated:Connect(function()
+    minimized = false
+    miniButton.Visible = false
+    main.Visible = true
+end)
+
+-- กากบาทปิดสคริปต์
+close.Activated:Connect(function()
+    gui:Destroy()
+end)
+
+print("Ole_xz window controls loaded")
